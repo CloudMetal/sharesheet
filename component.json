@@ -1,0 +1,7 @@
+{
+  "name": "sharesheet",
+  "description": "Multi-user spreadsheet application",
+  "version": "0.0.1",
+  "local": ["boot"],
+  "paths": ["client"]
+}
