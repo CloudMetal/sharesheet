@@ -4,10 +4,10 @@ HTML = $(wildcard client/*/*.html)
 TEMPLATES = $(THML:.html=.js)
 
 build: components $(SRC) $(TEMPLATES)
-	@component build
+	@component build --dev
 
 components: component.json
-	@component install
+	@component install --dev
 
 %.js: %.html
 	@component convert $<

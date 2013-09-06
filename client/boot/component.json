@@ -1,9 +1,7 @@
 {
   "name": "boot",
   "description": "Main app boot component",
-  "dependencies": {
-    "component/domify": "*"
-  },
+  "dependencies": {},
   "scripts": ["index.js"],
   "styles": ["style.css"],
   "local": []
