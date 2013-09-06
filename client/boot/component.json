@@ -4,5 +4,5 @@
   "dependencies": {},
   "scripts": ["index.js"],
   "styles": ["style.css"],
-  "local": []
+  "local": ["spreadsheet"]
 }

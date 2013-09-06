@@ -1,7 +1,7 @@
 
 SRC = $(wildcard client/*/*.js)
 HTML = $(wildcard client/*/*.html)
-TEMPLATES = $(THML:.html=.js)
+TEMPLATES = $(HTML:.html=.js)
 
 build: components $(SRC) $(TEMPLATES)
 	@component build --dev
