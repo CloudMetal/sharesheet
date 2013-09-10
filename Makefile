@@ -15,4 +15,7 @@ components: component.json
 clean:
 	rm -fr build components $(TEMPLATES)
 
+bootstrap:
+	node ./script/bootstrap.js
+
 .PHONY: clean

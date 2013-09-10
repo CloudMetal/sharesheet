@@ -6,6 +6,7 @@
     "start": "node app"
   },
   "dependencies": {
-    "express": "3.3.8"
+    "express": "3.3.8",
+    "level": "0.15.0"
   }
 }

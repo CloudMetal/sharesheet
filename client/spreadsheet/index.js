@@ -4,13 +4,13 @@
  */
 
 var model = require('model');
-var timestamps = require('model-timestamps');
+// var timestamps = require('model-timestamps');
 
 /**
  * Spreadsheet model.
  */
 
 module.exports = model('Spreadsheet')
-  .use(timestamps)
+  // .use(timestamps)
   .attr('name')
 
