@@ -1,8 +1,13 @@
 {
   "name": "boot",
   "description": "Main app boot component",
-  "dependencies": {},
+  "dependencies": {
+    "visionmedia/superagent": "*"
+  },
   "scripts": ["index.js"],
   "styles": ["style.css"],
-  "local": ["spreadsheet"]
+  "local": [
+    "spreadsheet",
+    "menu-view"
+  ]
 }

@@ -1,0 +1,13 @@
+{
+  "name": "menu-view",
+  "description": "Menu view",
+  "version": "0.0.1",
+  "dependencies": {
+    "component/domify": "*"
+  },
+  "scripts": [ 
+    "index.js", 
+    "template.js"
+  ],
+  "local": [ "menu-item-view" ]
+}

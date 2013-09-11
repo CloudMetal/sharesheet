@@ -1,4 +1,5 @@
 
+MANIFESTS = $(wildcard client/*/component.json)
 SRC = $(wildcard client/*/*.js)
 HTML = $(wildcard client/*/*.html)
 TEMPLATES = $(HTML:.html=.js)
@@ -6,7 +7,7 @@ TEMPLATES = $(HTML:.html=.js)
 build: components $(SRC) $(TEMPLATES)
 	@component build --dev
 
-components: component.json
+components: $(MANIFESTS)
 	@component install --dev
 
 %.js: %.html
