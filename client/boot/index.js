@@ -6,6 +6,7 @@
 var request = require('superagent');
 var MenuView = require('menu-view');
 var Spreadsheet = require('spreadsheet');
+var page = require('page');
 
 // get dom content
 var content = document.querySelector('#content');
@@ -16,15 +17,24 @@ var store = {
 
 var spreadsheetMenu;
 
-// get all spreadsheets
+// routes
 
-request
+page('/', index);
+page();
+
+// route endpoints
+
+function index() {
+  request
   .get('/api/v1/spreadsheet/all')
   .end(function (err, res) {
     if (err) console.log(err);
     parseSpreadsheets(res.body["spreadsheets"]);
     createMenu();
   });
+}
+
+// helper methods
 
 function parseSpreadsheets(spreadsheets) {
   // clear existing spreadsheets

@@ -3,11 +3,12 @@
   "description": "Menu view",
   "version": "0.0.1",
   "dependencies": {
-    "component/domify": "*"
+    "component/domify": "*",
+    "component/reactive": "*"
   },
   "scripts": [ 
     "index.js", 
-    "template.js"
-  ],
-  "local": [ "menu-item-view" ]
+    "template.js",
+    "item-template.js"
+  ]
 }

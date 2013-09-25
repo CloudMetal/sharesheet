@@ -2,7 +2,8 @@
   "name": "boot",
   "description": "Main app boot component",
   "dependencies": {
-    "visionmedia/superagent": "*"
+    "visionmedia/superagent": "*",
+    "visionmedia/page.js": "*"
   },
   "scripts": ["index.js"],
   "styles": ["style.css"],

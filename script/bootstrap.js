@@ -19,14 +19,18 @@ exec('rm -rf ' + location, function (error, stdout, stderr) {
 function createDB() {   
 
   // create db
-  var db = level(dbPath, { "valueEncoding": "json" });
+  var db = level(location, { "valueEncoding": "json" });
 
   // key count
   var count = 0;
 
   seedData["spreadsheets"].forEach(function (data) {
 
-    var key = 'spreadsheet!'+(count++);
+    var id = count++;
+
+    var key = 'spreadsheet!'+id;
+
+    data.id = id;
 
     db.put(key, data, function (err) {
       if (err) return console.log('Ooops!', err) // some kind of I/O error

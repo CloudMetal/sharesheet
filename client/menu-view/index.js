@@ -5,7 +5,8 @@
 
 var domify = require('domify');
 var html = require('./template');
-var MenuItemView = require('menu-item-view');
+var itemHtml = require('./item');
+var reactive = require('reactive');
 
 /**
  * Export Menu
@@ -14,10 +15,8 @@ var MenuItemView = require('menu-item-view');
 module.exports = Menu;
 
 function Menu(collection) {
-
   this.collection = collection;
   this.el = domify(html);
-
 };
 
 
@@ -25,8 +24,14 @@ Menu.prototype.render = function () {
   var self = this;
 
   this.collection.forEach(function (model) {
-    var item = new MenuItemView(model);
-    self.el.appendChild(item.el);
+    var html = domify(itemHtml);
+    var el = reactive(html, model, self).el;
+    self.el.appendChild(el);
   });
 
+};
+
+Menu.prototype.onSelect = function (e) {
+  console.log(e);
+  e.preventDefault();
 };

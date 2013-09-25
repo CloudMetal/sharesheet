@@ -10,6 +10,7 @@ var model = require('model');
  */
 
 module.exports = model('Spreadsheet')
+  .attr('id')
   .attr('name')
   .attr('created_at')
   .attr('updated_at');
