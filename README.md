@@ -15,4 +15,11 @@
 
 ## Running the app
 
+ Start application on PORT 3000
+
     $ node app
+
+ Start application on custom PORT
+
+    $ PORT=4000 node app
+

@@ -7,6 +7,7 @@ var express = require('express');
 var build = require('./server/build');
 var spreadsheets = require('./server/spreadsheets');
 var app = express();
+var port = process.env.PORT || 3000;
 
 // configure
 
@@ -31,5 +32,5 @@ app.all('*', build, function(req, res) {
 
 // bind
 
-app.listen(3000);
-console.log('listening on 3000');
+app.listen(port);
+console.log('listening on %d', port);
