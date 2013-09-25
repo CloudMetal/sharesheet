@@ -23,3 +23,16 @@
 
     $ PORT=4000 node app
 
+## Features
+
+ - [ ] multiple sheets
+ - [ ] realtime synced views
+ - [ ] CSV import
+ - [ ] CSV export
+ - [ ] row and column resizing
+ - [ ] cell formatting
+    - [ ] color
+    - [ ] backgound color
+    - [ ] border
+    - [ ] justification
+
