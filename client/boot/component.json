@@ -9,6 +9,7 @@
   "styles": ["style.css"],
   "local": [
     "spreadsheet",
-    "menu-view"
+    "menu-view",
+    "spreadsheet-view"
   ]
 }

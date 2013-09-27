@@ -5,7 +5,7 @@
 
 var domify = require('domify');
 var html = require('./template');
-var itemHtml = require('./item');
+var itemHtml = require('./item-template');
 var reactive = require('reactive');
 
 /**

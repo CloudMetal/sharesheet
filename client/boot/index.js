@@ -6,6 +6,7 @@
 var request = require('superagent');
 var MenuView = require('menu-view');
 var Spreadsheet = require('spreadsheet');
+var SpreadsheetView = require('spreadsheet-view');
 var page = require('page');
 
 // get dom content
@@ -19,22 +20,48 @@ var spreadsheetMenu;
 
 // routes
 
-page('/', index);
+page('/', loadMenu, index);
+page('/spreadsheet/*', loadMenu);
+page('/spreadsheet', index);
+page('/spreadsheet/:id', show);
 page();
 
 // route endpoints
 
 function index() {
-  request
-  .get('/api/v1/spreadsheet/all')
-  .end(function (err, res) {
-    if (err) console.log(err);
-    parseSpreadsheets(res.body["spreadsheets"]);
-    createMenu();
+  
+};
+
+function show(ctx) {
+  find(ctx.params.id, function (err, data) {
+    console.log(data);
+    var model = new Spreadsheet(data["spreadsheet"]);
+    var view = new SpreadsheetView(model);
+    content.appendChild(view.el);
   });
-}
+};
+
+// middleware
+
+function loadMenu(ctx, next) {
+  if (store.spreadsheets.length) {
+    createMenu();
+  } else {
+    find('all', function (err, data) {
+      parseSpreadsheets(data["spreadsheets"]);
+      createMenu();
+    });
+  }
+  next();
+};
 
 // helper methods
+
+function createMenu() {
+  spreadsheetMenu = new MenuView(store.spreadsheets);
+  content.appendChild(spreadsheetMenu.el);
+  spreadsheetMenu.render();
+};
 
 function parseSpreadsheets(spreadsheets) {
   // clear existing spreadsheets
@@ -46,8 +73,13 @@ function parseSpreadsheets(spreadsheets) {
   });
 };
 
-function createMenu() {
-  spreadsheetMenu = new MenuView(store.spreadsheets);
-  content.appendChild(spreadsheetMenu.el);
-  spreadsheetMenu.render();
-}
+function find(id, callback) {
+  var id = id || 'all';
+  request
+    .get('/api/v1/spreadsheet/' + id)
+    .end(function (err, res) {
+      if (err) console.log(err);
+      callback(err, res.body);
+    });
+};
+
