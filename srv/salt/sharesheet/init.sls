@@ -1,4 +1,0 @@
-
-include:
-  - node
-  - sharesheet.npm

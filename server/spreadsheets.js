@@ -1,8 +1,8 @@
-
-var levelup = require('level');
+var levelup = require('levelup');
+var config = require('../config/sharesheet.json')["leveldb"];
 
 // level db
-var db = levelup(__dirname + '/db', { "valueEncoding": "json" });
+var db = levelup(config['location'], { "valueEncoding": config['encoding'] });
 
 // /**
 //  * Faux db.
@@ -29,9 +29,9 @@ var db = levelup(__dirname + '/db', { "valueEncoding": "json" });
  * GET all spreadsheets.
  */
 
-exports.all = function(req, res){
+exports.all = function (req, res) {
   find(function (err, value) {
-    if (err) console.log(err);
+    if (err) console.error('Error:', err);
     res.json(200, { "spreadsheets": value });
   });
 };
@@ -40,7 +40,7 @@ exports.all = function(req, res){
  * GET spreadsheet :id.
  */
 
-exports.show = function(req, res){
+exports.show = function (req, res) {
   var id = req.params.id;
   
   db.get('spreadsheet!'+id, function (err, value) {
@@ -49,7 +49,7 @@ exports.show = function(req, res){
       if (err.notFound) {
         return res.send(404, 'spreadsheet does not exist');
       }
-      console.log(err);
+      console.error('Error:', err.message);
       return res.send(400, err);
     }
 
@@ -62,7 +62,7 @@ exports.show = function(req, res){
  * POST a new spreadsheet.
  */
 
-exports.create = function(req, res){
+exports.create = function (req, res) {
   var spreadsheet = req.body;
   var id = spreadsheets.push(spreadsheet) - 1;
   spreadsheet.id = id;
@@ -73,7 +73,7 @@ exports.create = function(req, res){
  * DELETE spreadsheet :id.
  */
 
-exports.remove = function(req, res){
+exports.remove = function (req, res) {
   var id = req.params.id;
   var i = indexOf(id);
   spreadsheets.splice(i, 1);
@@ -84,7 +84,7 @@ exports.remove = function(req, res){
  * PUT changes to spreadsheet :id.
  */
 
-exports.update = function(req, res){
+exports.update = function (req, res) {
   var id = req.params.id;
   var i = indexOf(id);
   var body = req.body;
@@ -116,6 +116,9 @@ function find(callback) {
   db.createReadStream({ start: 'spreadsheet!', end: 'spreadsheet!\xff' })
     .on('data', function (value) {
       data.push(value.value)
+    })
+    .on('error', function (err) {
+      console.error('Error:', err.message);
     })
     .on('close', function () {
       callback(null, data);

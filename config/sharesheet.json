@@ -1,0 +1,6 @@
+{
+  "leveldb": {
+    "location": "/data/sharesheet-db",
+    "encoding": "json"
+  }
+}

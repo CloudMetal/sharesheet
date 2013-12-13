@@ -1,14 +1,12 @@
-
 var path = require('path');
 var exec = require('child_process').exec;
 
 var level = require('level');
 var seedData = require('./seed-data.json');
-
-var location = path.join(__dirname, '../server/db');
+var config = require('../config/sharesheet.json')["leveldb"];
 
 // remove existing db
-exec('rm -rf ' + location, function (error, stdout, stderr) {
+exec('rm -rf ' + config['location'], function (error, stdout, stderr) {
   if (error !== null) {
     console.log('exec error: ' + error);
   } else {
@@ -19,7 +17,7 @@ exec('rm -rf ' + location, function (error, stdout, stderr) {
 function createDB() {   
 
   // create db
-  var db = level(location, { "valueEncoding": "json" });
+  var db = level(config['location'], { "valueEncoding": config['encoding'] });
 
   // key count
   var count = 0;
