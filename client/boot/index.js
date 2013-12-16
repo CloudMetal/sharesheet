@@ -10,7 +10,10 @@ var SpreadsheetView = require('spreadsheet-view');
 var page = require('page');
 
 // get dom content
-var content = document.querySelector('#content');
+var els = {
+  navContainer: document.querySelector('#content nav'),
+  contentContainer: document.querySelector('#content article')
+}
 
 var store = {
   spreadsheets: []
@@ -29,7 +32,7 @@ page();
 // route endpoints
 
 function index() {
-  
+
 };
 
 function show(ctx) {
@@ -37,7 +40,8 @@ function show(ctx) {
     console.log(data);
     var model = new Spreadsheet(data["spreadsheet"]);
     var view = new SpreadsheetView(model);
-    content.appendChild(view.el);
+    els.contentContainer.innerHTML = "";
+    els.contentContainer.appendChild(view.el);
   });
 };
 
@@ -58,8 +62,9 @@ function loadMenu(ctx, next) {
 // helper methods
 
 function createMenu() {
+  if (spreadsheetMenu) { return; }
   spreadsheetMenu = new MenuView(store.spreadsheets);
-  content.appendChild(spreadsheetMenu.el);
+  els.navContainer.appendChild(spreadsheetMenu.el);
   spreadsheetMenu.render();
 };
 

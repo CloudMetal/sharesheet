@@ -33,5 +33,5 @@ Menu.prototype.render = function () {
 
 Menu.prototype.onSelect = function (e) {
   console.log(e);
-  e.preventDefault();
+  // e.preventDefault();
 };
