@@ -1,7 +1,7 @@
 var path = require('path');
 var exec = require('child_process').exec;
 
-var level = require('level');
+var level = require('levelup');
 var seedData = require('./seed-data.json');
 var config = require('../config/sharesheet.json')["leveldb"];
 
@@ -14,7 +14,7 @@ exec('rm -rf ' + config['location'], function (error, stdout, stderr) {
   }
 });
 
-function createDB() {   
+function createDB() {
 
   // create db
   var db = level(config['location'], { "valueEncoding": config['encoding'] });
