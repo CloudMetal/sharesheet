@@ -42,7 +42,7 @@ exports.all = function (req, res) {
 
 exports.show = function (req, res) {
   var id = req.params.id;
-  
+
   db.get('spreadsheet!'+id, function (err, value) {
 
     if (err) {
@@ -86,12 +86,29 @@ exports.remove = function (req, res) {
 
 exports.update = function (req, res) {
   var id = req.params.id;
-  var i = indexOf(id);
   var body = req.body;
-  var spreadsheet = spreadsheets[i];
-  if (!spreadsheet) return res.send(404, 'spreadsheet does not exist');
-  spreadsheet.name = body.name;
-  res.send(200);
+
+  // overwrite the id in the body with the actual id
+  // alternatively, we could return a 400 if the id in the url doesn't match the id in the body.
+  // what do you think?
+  body.id = id;
+
+  db.put('spreadsheet!'+id, body, function (err) {
+    if (err) {res.send(400, err);}
+
+    db.get('spreadsheet!' + id, function (err, value) {
+      if (err) {
+        if (err.notFound) {
+          return res.send(404, 'spreadsheet does not exist');
+        }
+        console.error('Error:', err.message);
+        return res.send(400, err);
+      }
+
+      res.json(200, { "spreadsheet": value });
+
+    });
+  });
 };
 
 

@@ -4,10 +4,11 @@
   "version": "0.0.1",
   "dependencies": {
     "component/domify": "*",
-    "component/reactive": "*"
+    "component/reactive": "*",
+    "visionmedia/superagent": "*"
   },
-  "scripts": [ 
-    "index.js", 
+  "scripts": [
+    "index.js",
     "template.js"
   ]
 }

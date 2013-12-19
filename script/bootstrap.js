@@ -1,5 +1,6 @@
 var path = require('path');
 var exec = require('child_process').exec;
+var fs = require('fs');
 
 var level = require('levelup');
 var seedData = require('./seed-data.json');
@@ -15,6 +16,9 @@ exec('rm -rf ' + config['location'], function (error, stdout, stderr) {
 });
 
 function createDB() {
+
+  // create dir
+  fs.mkdirSync(config['location']);
 
   // create db
   var db = level(config['location'], { "valueEncoding": config['encoding'] });

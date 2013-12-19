@@ -21,8 +21,8 @@ app.use(express.static(__dirname + '/build'));
 app.get('/api/v1/spreadsheet/all', spreadsheets.all);
 app.get('/api/v1/spreadsheet/:id', spreadsheets.show);
 // app.post('/api/v1/spreadsheet', spreadsheets.create);
-// app.put('/spreadsheet/:id', spreadsheets.update);
-// app.del('/spreadsheet/:id', spreadsheets.remove);
+app.put('/api/v1/spreadsheet/:id', spreadsheets.update);
+// app.del('/api/v1/spreadsheet/:id', spreadsheets.remove);
 
 // catch-all
 
