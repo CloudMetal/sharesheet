@@ -1,9 +1,3 @@
 <h1 id="spreadsheet-name" data-text="name" contenteditable="true"></h1>
-<table>
-  <thead>
-    <tr data-html="thead"></tr>
-  </thead>
-  <tbody data-html="tbody">
-  </tbody>
-</table>
-<button on-click="saveSpreadsheet">Save</button>
+<table on-input="contentChange" data-html="table"></table>
+<button on-click="save">Save</button>
